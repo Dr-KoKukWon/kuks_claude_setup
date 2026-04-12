@@ -121,6 +121,10 @@ Read 도구로 캡처된 이미지(들)를 읽고 다음을 분석합니다:
 - 분석이 완료된 캡처는 추후 별도 아카이브 폴더(예: `experiments/capture/analyzed/`)로 이동할 계획입니다. 현 단계에서는 자동 이동하지 않습니다.
 
 #### 환경 요구
-- **Linux (X11)**: `xwininfo` 필수. `xprop`가 있으면 활성 창 감지 폴백 가능. 캡처는 `Pillow(PIL)`가 있으면 추가 설치 없이 동작하며, `mss` 또는 `xdotool`이 설치돼 있으면 그 경로도 사용됩니다.
+- **Linux (X11)**: `xwininfo`와 `xdotool` 필수. 없으면 먼저 설치하세요:
+  ```bash
+  sudo apt-get install -y xdotool x11-utils
+  ```
+  `xdotool`은 캡처 전 대상 창을 앞으로 올리는 데 필요합니다 (가려진 창 캡처 문제 방지). `xprop`가 있으면 활성 창 감지 폴백 가능. 캡처는 `Pillow(PIL)`가 있으면 추가 설치 없이 동작하며, `mss`가 설치돼 있으면 그 경로도 사용됩니다.
 - **Windows**: 기존 `mss` + ctypes 경로 유지.
 - **Wayland**: 미지원 (xwininfo 의존).

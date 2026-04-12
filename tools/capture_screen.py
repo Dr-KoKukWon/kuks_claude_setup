@@ -187,7 +187,16 @@ def capture_active_window(out_path):
     return _grab_bbox(g["x"], g["y"], g["w"], g["h"], out_path)
 
 
+def _activate_window(wid):
+    """Raise and focus the window so it is not occluded before capture."""
+    import time
+    if shutil.which("xdotool"):
+        _run(["xdotool", "windowactivate", "--sync", wid])
+        time.sleep(1.0)
+
+
 def capture_window_by_id(out_path, wid):
+    _activate_window(wid)
     g = get_window_geometry_x11(wid)
     return _grab_bbox(g["x"], g["y"], g["w"], g["h"], out_path)
 
